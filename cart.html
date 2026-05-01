@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Your shopping cart at Shahid & Afaq Mobiles." />
+    <title>Cart | Shahid & Afaq Mobiles</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="pages.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="images/sa_mobiles_logo.png" alt="Shahid & Afaq Mobiles Logo" style="height:40px; margin-right:10px;"/> 
+                    <span>Shahid & Afaq Mobiles</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#products">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+                        <i class="fas fa-heart"></i>
+                        <span class="badge">3</span>
+                    </a>
+                    <a href="cart.html" class="icon-btn active-icon" aria-label="Cart">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="badge" id="cart-count">5</span>
+                    </a>
+                    <a href="login.html" class="icon-btn" aria-label="Login">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Shopping <span class="gradient-text">Cart</span></h1>
+                <p>Review your items and proceed to checkout.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-layout">
+
+                <!-- Cart Items -->
+                <div class="cart-items" id="cart-items">
+
+                    <div class="cart-item" data-price="299">
+                        <div class="cart-item-img">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=150&q=80" alt="Luxury Watch" />
+                        </div>
+                        <div class="cart-item-info">
+                            <h3>Luxury Watch</h3>
+                            <p class="cart-item-meta">Classic • Silver</p>
+                            <div class="qty-control">
+                                <button class="qty-btn minus" aria-label="Decrease">−</button>
+                                <span class="qty-value">1</span>
+                                <button class="qty-btn plus" aria-label="Increase">+</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-right">
+                            <div class="cart-item-price">$299</div>
+                            <button class="remove-cart-item" aria-label="Remove item">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="cart-item" data-price="149">
+                        <div class="cart-item-img">
+                            <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=150&q=80" alt="Perfume" />
+                        </div>
+                        <div class="cart-item-info">
+                            <h3>Signature Perfume</h3>
+                            <p class="cart-item-meta">100ml • Eau de Parfum</p>
+                            <div class="qty-control">
+                                <button class="qty-btn minus" aria-label="Decrease">−</button>
+                                <span class="qty-value">2</span>
+                                <button class="qty-btn plus" aria-label="Increase">+</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-right">
+                            <div class="cart-item-price">$298</div>
+                            <button class="remove-cart-item" aria-label="Remove item">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="cart-item" data-price="189">
+                        <div class="cart-item-img">
+                            <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=150&q=80" alt="Sneakers" />
+                        </div>
+                        <div class="cart-item-info">
+                            <h3>Air Sneakers</h3>
+                            <p class="cart-item-meta">Size 42 • White</p>
+                            <div class="qty-control">
+                                <button class="qty-btn minus" aria-label="Decrease">−</button>
+                                <span class="qty-value">1</span>
+                                <button class="qty-btn plus" aria-label="Increase">+</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-right">
+                            <div class="cart-item-price">$189</div>
+                            <button class="remove-cart-item" aria-label="Remove item">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="cart-item" data-price="99">
+                        <div class="cart-item-img">
+                            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=150&q=80" alt="Camera" />
+                        </div>
+                        <div class="cart-item-info">
+                            <h3>Polaroid Camera</h3>
+                            <p class="cart-item-meta">Instant • Pastel Blue</p>
+                            <div class="qty-control">
+                                <button class="qty-btn minus" aria-label="Decrease">−</button>
+                                <span class="qty-value">1</span>
+                                <button class="qty-btn plus" aria-label="Increase">+</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-right">
+                            <div class="cart-item-price">$99</div>
+                            <button class="remove-cart-item" aria-label="Remove item">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="empty-cart" style="display:none;">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h3>Your cart is empty</h3>
+                    <p>Add some amazing products!</p>
+                    <a href="index.html#products" class="btn btn-primary">Shop Now</a>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary" id="order-summary">
+                    <h2>Order Summary</h2>
+                    <div class="summary-line">
+                        <span>Subtotal (<span id="item-count">5</span> items)</span>
+                        <span id="subtotal">$885</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Shipping</span>
+                        <span class="free-tag">FREE</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Tax (8%)</span>
+                        <span id="tax">$70.80</span>
+                    </div>
+                    <div class="promo-code">
+                        <input type="text" id="promo-input" placeholder="Promo code" />
+                        <button id="apply-promo" class="btn btn-primary btn-sm">Apply</button>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="summary-total">
+                        <span>Total</span>
+                        <span id="total">$955.80</span>
+                    </div>
+                    <a href="login.html" class="btn btn-primary btn-full" id="checkout-btn">
+                        <i class="fas fa-lock"></i> Proceed to Checkout
+                    </a>
+                    <a href="index.html#products" class="continue-shopping">
+                        <i class="fas fa-arrow-left"></i> Continue Shopping
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Shahid & Afaq Mobiles. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function recalculate() {
+            const items = document.querySelectorAll('.cart-item');
+            let subtotal = 0, totalQty = 0;
+            items.forEach(item => {
+                const price = parseFloat(item.dataset.price);
+                const qty = parseInt(item.querySelector('.qty-value').textContent);
+                subtotal += price * qty;
+                totalQty += qty;
+            });
+            const tax = subtotal * 0.08;
+            document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('tax').textContent = '$' + tax.toFixed(2);
+            document.getElementById('total').textContent = '$' + (subtotal + tax).toFixed(2);
+            document.getElementById('item-count').textContent = totalQty;
+            document.getElementById('cart-count').textContent = items.length;
+            if (items.length === 0) {
+                document.getElementById('cart-items').style.display = 'none';
+                document.getElementById('order-summary').style.display = 'none';
+                document.getElementById('empty-cart').style.display = 'flex';
+            }
+        }
+
+        document.querySelectorAll('.qty-btn.plus').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const span = btn.previousElementSibling;
+                span.textContent = parseInt(span.textContent) + 1;
+                const item = btn.closest('.cart-item');
+                const price = parseFloat(item.dataset.price);
+                const qty = parseInt(span.textContent);
+                item.querySelector('.cart-item-price').textContent = '$' + (price * qty).toFixed(2);
+                recalculate();
+            });
+        });
+
+        document.querySelectorAll('.qty-btn.minus').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const span = btn.nextElementSibling;
+                if (parseInt(span.textContent) > 1) {
+                    span.textContent = parseInt(span.textContent) - 1;
+                    const item = btn.closest('.cart-item');
+                    const price = parseFloat(item.dataset.price);
+                    const qty = parseInt(span.textContent);
+                    item.querySelector('.cart-item-price').textContent = '$' + (price * qty).toFixed(2);
+                    recalculate();
+                }
+            });
+        });
+
+        document.querySelectorAll('.remove-cart-item').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.cart-item');
+                item.style.animation = 'fadeOut 0.3s ease forwards';
+                setTimeout(() => { item.remove(); recalculate(); }, 300);
+            });
+        });
+
+        document.getElementById('apply-promo').addEventListener('click', () => {
+            const code = document.getElementById('promo-input').value.trim().toUpperCase();
+            if (code === 'SAVE10') {
+                alert('Promo code applied! 10% discount.');
+            } else {
+                alert('Invalid promo code.');
+            }
+        });
+    </script>
+
+</body>
+</html>
