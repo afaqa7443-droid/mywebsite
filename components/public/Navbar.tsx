@@ -17,7 +17,7 @@ export default function Navbar() {
             WhatsApp
           </a>
           <Link
-            href="/admin/login"
+            href="/login"
             className="rounded-md bg-gray-100 px-3 py-1.5 text-gray-700 hover:bg-gray-200"
           >
             Admin
