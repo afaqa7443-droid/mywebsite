@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-50: #f0fdf4;
+  --brand-100: #dcfce7;
+  --brand-200: #bbf7d0;
+  --brand-500: #22c55e;
+  --brand-600: #16a34a;
+  --brand-700: #15803d;
+  --accent-50: #eff6ff;
+  --accent-500: #3b82f6;
+  --accent-600: #2563eb;
+  --font-sans: system-ui, -apple-system, sans-serif;
+}
