@@ -7,7 +7,7 @@ export default function AdminLayout({
 }) {
   return (
     <div className="flex min-h-screen">
-      <aside className="flex w-56 flex-col border-r border-gray-200 bg-gray-50 p-4">
+      <aside className="flex w-60 flex-col border-r border-gray-200 bg-gray-50 p-4">
         <Link
           href="/admin"
           className="mb-6 text-lg font-bold text-brand-600"

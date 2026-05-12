@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const ADMIN_PATHS = ['/admin'];
 const LOGIN_PATH = '/admin/login';
 
 export function middleware(request: NextRequest) {
