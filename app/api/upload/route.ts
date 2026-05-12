@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { verifyApiSession } from '@/lib/auth';
 
 export async function POST(request: Request) {
+  if (!verifyApiSession()) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
   const formData = await request.formData();
   const file = formData.get('file') as File;
   const bucket = formData.get('bucket') as string;

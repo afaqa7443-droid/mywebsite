@@ -42,6 +42,21 @@ export default function ReviewForm({ review, listingId, onDone }: Props) {
 
       if (!res.ok) throw new Error('Failed to save review');
 
+      const savedReview = await res.json();
+
+      for (let i = 0; i < mediaUrls.length; i++) {
+        await fetch('/api/reviews/media', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            review_id: savedReview.id,
+            url: mediaUrls[i],
+            type: mediaUrls[i].match(/\.(mp4|webm|mov)$/i) ? 'video' : 'image',
+            sort_order: i,
+          }),
+        });
+      }
+
       onDone();
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to save');
