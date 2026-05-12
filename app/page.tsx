@@ -11,7 +11,7 @@ async function getListings() {
     .select('*')
     .order('created_at', { ascending: false });
 
-  if (!listings) return [];
+  if (!listings || listings.length === 0) return [];
 
   const { data: media } = await supabase
     .from('listing_media')

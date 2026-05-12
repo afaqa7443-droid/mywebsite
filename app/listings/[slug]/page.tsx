@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { formatPrice, waLink } from '@/lib/utils';
-import type { Listing } from '@/types';
+import type { Listing, Review, ReviewMedia } from '@/types';
 import Navbar from '@/components/public/Navbar';
 import Footer from '@/components/public/Footer';
 import MediaGallery from '@/components/public/MediaGallery';
@@ -31,7 +31,7 @@ async function getListing(slug: string) {
     .eq('listing_id', listing.id)
     .order('created_at', { ascending: false });
 
-  let reviewsWithMedia: any[] = [];
+  let reviewsWithMedia: (Review & { media: ReviewMedia[] })[] = [];
   if (reviews && reviews.length > 0) {
     const { data: reviewMedia } = await supabase
       .from('review_media')
@@ -131,7 +131,7 @@ export default async function ListingPage({
               Reviews ({listing.reviews.length})
             </h2>
             <div className="space-y-3">
-              {listing.reviews.map((review: any) => (
+              {listing.reviews.map((review: Review & { media: ReviewMedia[] }) => (
                 <ReviewCard key={review.id} review={review} />
               ))}
             </div>
