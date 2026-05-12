@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
+import { verifyApiSession } from '@/lib/auth';
+import type { Review, ReviewMedia } from '@/types';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -21,7 +23,7 @@ export async function GET(request: Request) {
   }
 
   // Fetch review media
-  let reviewsWithMedia: any[] = [];
+  let reviewsWithMedia: (Review & { media: ReviewMedia[] })[] = [];
   if (reviews && reviews.length > 0) {
     const { data: reviewMedia } = await supabase
       .from('review_media')
@@ -39,6 +41,10 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  if (!verifyApiSession()) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const body = await request.json();
 
   const { data, error } = await supabase

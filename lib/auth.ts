@@ -24,3 +24,7 @@ export function setSessionCookie(value: string) {
 export function clearSessionCookie() {
   cookies().set(ADMIN_COOKIE, '', { maxAge: 0, path: '/' });
 }
+
+export function verifyApiSession(): boolean {
+  return !!cookies().get(ADMIN_COOKIE)?.value;
+}

@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
+import { verifyApiSession } from '@/lib/auth';
 
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
 ) {
+  if (!verifyApiSession()) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const body = await request.json();
 
   const { data: existing } = await supabase
@@ -50,6 +55,10 @@ export async function DELETE(
   _request: Request,
   { params }: { params: { id: string } }
 ) {
+  if (!verifyApiSession()) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const { data: existing } = await supabase
     .from('reviews')
     .select('listing_id')

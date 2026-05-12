@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
+import { verifyApiSession } from '@/lib/auth';
 
 export async function GET(
   _request: Request,
@@ -13,7 +14,10 @@ export async function GET(
     .single();
 
   if (error) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    if (error.code === 'PGRST116') {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
   return NextResponse.json(data);
@@ -23,6 +27,10 @@ export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
 ) {
+  if (!verifyApiSession()) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const body = await request.json();
 
   const { data, error } = await supabase
@@ -57,6 +65,10 @@ export async function DELETE(
   _request: Request,
   { params }: { params: { id: string } }
 ) {
+  if (!verifyApiSession()) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const { error } = await supabase
     .from('listings')
     .delete()

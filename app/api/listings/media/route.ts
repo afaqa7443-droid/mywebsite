@@ -1,7 +1,13 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { revalidatePath } from 'next/cache';
+import { verifyApiSession } from '@/lib/auth';
 
 export async function POST(request: Request) {
+  if (!verifyApiSession()) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const body = await request.json();
 
   const { data, error } = await supabase
@@ -19,10 +25,25 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  // Revalidate after media change
+  const { data: listing } = await supabase
+    .from('listings')
+    .select('slug')
+    .eq('id', body.listing_id)
+    .single();
+
+  if (listing) {
+    revalidatePath(`/listings/${listing.slug}`);
+  }
+
   return NextResponse.json(data, { status: 201 });
 }
 
 export async function DELETE(request: Request) {
+  if (!verifyApiSession()) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const { searchParams } = new URL(request.url);
   const listingId = searchParams.get('listing_id');
 
@@ -37,6 +58,17 @@ export async function DELETE(request: Request) {
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  // Revalidate after media deletion
+  const { data: listing } = await supabase
+    .from('listings')
+    .select('slug')
+    .eq('id', listingId)
+    .single();
+
+  if (listing) {
+    revalidatePath(`/listings/${listing.slug}`);
   }
 
   return NextResponse.json({ success: true });
