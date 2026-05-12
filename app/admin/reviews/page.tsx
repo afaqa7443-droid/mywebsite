@@ -9,7 +9,8 @@ export default function AdminReviewsPage() {
   const [selectedListing, setSelectedListing] = useState<string | null>(null);
   const [reviews, setReviews] = useState<(Review & { media: ReviewMedia[] })[]>([]);
   const [showForm, setShowForm] = useState(false);
-  const [editingReview, setEditingReview] = useState<any>(null);
+  const [reviewsLoading, setReviewsLoading] = useState(false);
+  const [editingReview, setEditingReview] = useState<Review | null>(null);
 
   useEffect(() => {
     fetch('/api/listings')
@@ -18,9 +19,14 @@ export default function AdminReviewsPage() {
   }, []);
 
   async function loadReviews(listingId: string) {
-    const res = await fetch(`/api/reviews?listing_id=${listingId}`);
-    const data = await res.json();
-    setReviews(data);
+    setReviewsLoading(true);
+    try {
+      const res = await fetch(`/api/reviews?listing_id=${listingId}`);
+      const data = await res.json();
+      setReviews(data);
+    } finally {
+      setReviewsLoading(false);
+    }
   }
 
   function selectListing(id: string) {
@@ -76,10 +82,12 @@ export default function AdminReviewsPage() {
             {showForm ? 'Cancel' : '+ Add Review'}
           </button>
 
+          {reviewsLoading && <p className="text-sm text-gray-400">Loading reviews...</p>}
+
           {showForm && (
             <ReviewForm
               listingId={selectedListing}
-              review={editingReview}
+              review={editingReview ?? undefined}
               onDone={handleDone}
             />
           )}

@@ -10,6 +10,7 @@ interface Props {
 
 export default function MediaUploader({ bucket, onUpload, accept }: Props) {
   const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
@@ -31,8 +32,8 @@ export default function MediaUploader({ bucket, onUpload, accept }: Props) {
 
       const { url } = await res.json();
       onUpload(url);
-    } catch (err) {
-      console.error('Upload error:', err);
+    } catch (err: unknown) {
+      setUploadError(err instanceof Error ? err.message : 'Upload failed');
     } finally {
       setUploading(false);
       if (inputRef.current) inputRef.current.value = '';
@@ -51,6 +52,7 @@ export default function MediaUploader({ bucket, onUpload, accept }: Props) {
       {uploading && (
         <p className="mt-1 text-xs text-gray-400">Uploading...</p>
       )}
+      {uploadError && <p className="mt-1 text-xs text-red-500">{uploadError}</p>}
     </div>
   );
 }

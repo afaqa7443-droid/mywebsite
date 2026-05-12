@@ -100,8 +100,8 @@ export default function ListingForm({ listing }: Props) {
 
       router.push('/admin');
       router.refresh();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to save');
     } finally {
       setSaving(false);
     }

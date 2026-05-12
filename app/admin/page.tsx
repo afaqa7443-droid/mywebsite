@@ -8,12 +8,23 @@ import type { Listing } from '@/types';
 export default function AdminDashboard() {
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   async function loadListings() {
-    const res = await fetch('/api/listings');
-    const data = await res.json();
-    setListings(data);
-    setLoading(false);
+    try {
+      const res = await fetch('/api/listings');
+      if (!res.ok) {
+        setError('Failed to load listings');
+        setLoading(false);
+        return;
+      }
+      const data = await res.json();
+      setListings(data);
+    } catch {
+      setError('Failed to load listings');
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -41,6 +52,9 @@ export default function AdminDashboard() {
           + New Listing
         </Link>
       </div>
+      {error && (
+        <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</div>
+      )}
       <DataTable listings={listings} onDelete={handleDelete} />
     </div>
   );

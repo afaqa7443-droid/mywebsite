@@ -43,8 +43,8 @@ export default function ReviewForm({ review, listingId, onDone }: Props) {
       if (!res.ok) throw new Error('Failed to save review');
 
       onDone();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to save');
     } finally {
       setSaving(false);
     }
