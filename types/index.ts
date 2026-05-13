@@ -39,6 +39,13 @@ export interface ReviewMedia {
   sort_order: number;
 }
 
+export interface SiteSettings {
+  id: number;
+  whatsapp_number: string;
+  phone_number: string | null;
+  updated_at: string;
+}
+
 export interface ListingWithMedia extends Listing {
   media: ListingMedia[];
   reviews: (Review & { media: ReviewMedia[] })[];

@@ -33,6 +33,12 @@ export default function AdminLayout({
           >
             Reviews
           </Link>
+          <Link
+            href="/admin/settings"
+            className="rounded-md px-3 py-2 text-gray-700 hover:bg-gray-200"
+          >
+            Settings
+          </Link>
           <a
             href="/"
             className="mt-6 rounded-md px-3 py-2 text-gray-400 hover:bg-gray-200"

@@ -63,6 +63,12 @@ export default async function ListingPage({
     notFound();
   }
 
+  const { data: siteSettings } = await supabase
+    .from('site_settings')
+    .select('*')
+    .eq('id', 1)
+    .single();
+
   const conditionColor = {
     Excellent: 'text-green-700 bg-green-50',
     Good: 'text-amber-700 bg-amber-50',
@@ -114,10 +120,10 @@ export default async function ListingPage({
                 Contact to Buy
               </h3>
               <ContactButtons
-                whatsappLink={waLink(listing.whatsapp_link)}
+                whatsappLink={waLink(siteSettings?.whatsapp_number ?? listing.whatsapp_link)}
                 phoneLink={
-                  listing.phone_link
-                    ? `tel:${listing.phone_link}`
+                  siteSettings?.phone_number || listing.phone_link
+                    ? `tel:${siteSettings?.phone_number || listing.phone_link}`
                     : null
                 }
               />

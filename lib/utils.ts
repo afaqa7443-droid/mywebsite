@@ -1,6 +1,6 @@
 export function formatPrice(paise: number): string {
   const rupees = paise / 100;
-  return `\u20b9${rupees.toLocaleString('en-IN')}`;
+  return `Rs. ${rupees.toLocaleString('en-US')}`;
 }
 
 export function slugify(text: string): string {

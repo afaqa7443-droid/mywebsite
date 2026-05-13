@@ -25,7 +25,6 @@ export default function ListingForm({ listing }: Props) {
     condition: listing?.condition ?? 'Good',
     quantity: listing ? String(listing.quantity) : '1',
     description: listing?.description ?? '',
-    whatsapp_link: listing?.whatsapp_link ?? '',
     phone_link: listing?.phone_link ?? '',
   });
 
@@ -211,20 +210,6 @@ export default function ListingForm({ listing }: Props) {
             <option value="Good">Good</option>
             <option value="Fair">Fair</option>
           </select>
-        </div>
-        <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
-            WhatsApp Number
-          </label>
-          <input
-            type="tel"
-            name="whatsapp_link"
-            value={form.whatsapp_link}
-            onChange={handleChange}
-            required
-            placeholder="+91 98765 43210"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
-          />
         </div>
         <div>
           <label className="mb-1 block text-sm font-medium text-gray-700">
