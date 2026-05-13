@@ -1,0 +1,141 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import ReviewForm from '@/components/admin/ReviewForm';
+import type { Listing, Review, ReviewMedia } from '@/types';
+
+export default function AdminReviewsPage() {
+  const [listings, setListings] = useState<Listing[]>([]);
+  const [selectedListing, setSelectedListing] = useState<string | null>(null);
+  const [reviews, setReviews] = useState<(Review & { media: ReviewMedia[] })[]>([]);
+  const [showForm, setShowForm] = useState(false);
+  const [reviewsLoading, setReviewsLoading] = useState(false);
+  const [editingReview, setEditingReview] = useState<Review | null>(null);
+
+  useEffect(() => {
+    fetch('/api/listings')
+      .then((r) => r.json())
+      .then(setListings);
+  }, []);
+
+  async function loadReviews(listingId: string) {
+    setReviewsLoading(true);
+    try {
+      const res = await fetch(`/api/reviews?listing_id=${listingId}`);
+      const data = await res.json();
+      setReviews(data);
+    } finally {
+      setReviewsLoading(false);
+    }
+  }
+
+  function selectListing(id: string) {
+    setSelectedListing(id);
+    setShowForm(false);
+    setEditingReview(null);
+    loadReviews(id);
+  }
+
+  function handleDone() {
+    setShowForm(false);
+    setEditingReview(null);
+    if (selectedListing) loadReviews(selectedListing);
+  }
+
+  async function handleDelete(reviewId: string) {
+    if (!confirm('Delete this review?')) return;
+    await fetch(`/api/reviews/${reviewId}`, { method: 'DELETE' });
+    if (selectedListing) loadReviews(selectedListing);
+  }
+
+  return (
+    <div>
+      <h1 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">Reviews</h1>
+
+      <div className="mb-4">
+        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
+          Select Listing
+        </label>
+        <select
+          value={selectedListing ?? ''}
+          onChange={(e) => selectListing(e.target.value)}
+          className="w-full max-w-sm rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
+        >
+          <option value="">Choose a listing...</option>
+          {listings.map((l) => (
+            <option key={l.id} value={l.id}>
+              {l.title}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {selectedListing && (
+        <>
+          <button
+            onClick={() => {
+              setEditingReview(null);
+              setShowForm(!showForm);
+            }}
+            className="mb-4 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
+          >
+            {showForm ? 'Cancel' : '+ Add Review'}
+          </button>
+
+          {reviewsLoading && <p className="text-sm text-gray-400 dark:text-gray-500">Loading reviews...</p>}
+
+          {showForm && (
+            <ReviewForm
+              listingId={selectedListing}
+              review={editingReview ?? undefined}
+              onDone={handleDone}
+            />
+          )}
+
+          <div className="mt-4 space-y-3">
+            {reviews.map((review) => (
+              <div
+                key={review.id}
+                className="rounded-xl border border-gray-200 p-4 dark:border-gray-700"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="font-medium">
+                      {review.reviewer === '*' ? 'Anonymous' : review.reviewer}
+                    </span>
+                    <span className="ml-2 text-amber-500">
+                      {'★'.repeat(review.rating) + '☆'.repeat(5 - review.rating)}
+                    </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => {
+                        setEditingReview(review);
+                        setShowForm(true);
+                      }}
+                      className="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(review.id)}
+                      className="text-xs text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+                {review.text && (
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{review.text}</p>
+                )}
+              </div>
+            ))}
+            {reviews.length === 0 && !showForm && (
+              <p className="text-sm text-gray-400 dark:text-gray-500">No reviews for this listing.</p>
+            )}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}

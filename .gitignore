@@ -1,2 +1,6 @@
 .vercel
 .env*.local
+.superpowers/
+node_modules/
+*.tsbuildinfo
+.next/
