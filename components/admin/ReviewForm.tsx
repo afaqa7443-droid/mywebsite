@@ -66,13 +66,13 @@ export default function ReviewForm({ review, listingId, onDone }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border border-gray-200 p-4">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border border-gray-200 p-4 dark:border-gray-700">
       {error && (
-        <div className="text-sm text-red-600">{error}</div>
+        <div className="text-sm text-red-600 dark:text-red-400">{error}</div>
       )}
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
             Reviewer Name
           </label>
           <input
@@ -81,17 +81,17 @@ export default function ReviewForm({ review, listingId, onDone }: Props) {
             onChange={(e) => setReviewer(e.target.value)}
             required
             placeholder="Rahul S. (or * for anonymous)"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
             Rating
           </label>
           <select
             value={rating}
             onChange={(e) => setRating(Number(e.target.value))}
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
           >
             {[5, 4, 3, 2, 1].map((n) => (
               <option key={n} value={n}>
@@ -102,18 +102,18 @@ export default function ReviewForm({ review, listingId, onDone }: Props) {
         </div>
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700">
+        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
           Review Text
         </label>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           rows={3}
-          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
+          className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
         />
       </div>
       <div>
-        <label className="mb-1 block text-sm font-medium text-gray-700">
+        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
           Media (optional)
         </label>
         <MediaUploader
@@ -133,7 +133,7 @@ export default function ReviewForm({ review, listingId, onDone }: Props) {
         <button
           type="button"
           onClick={onDone}
-          className="text-sm text-gray-500 hover:text-gray-700"
+          className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
         >
           Cancel
         </button>

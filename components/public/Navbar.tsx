@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { waLink } from '@/lib/utils';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default async function Navbar() {
   const { data: settings } = await supabase
@@ -14,12 +15,12 @@ export default async function Navbar() {
     : '#';
 
   return (
-    <nav className="border-b border-gray-200 bg-white">
+    <nav className="border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href="/" className="text-xl font-bold text-brand-600">
           PhoneMarket
         </Link>
-        <div className="flex items-center gap-4 text-sm text-gray-600">
+        <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
           {settings?.whatsapp_number && (
             <a
               href={whatsappHref}
@@ -30,9 +31,10 @@ export default async function Navbar() {
               WhatsApp
             </a>
           )}
+          <ThemeToggle />
           <Link
             href="/login"
-            className="rounded-md bg-gray-100 px-3 py-1.5 text-gray-700 hover:bg-gray-200"
+            className="rounded-md bg-gray-100 px-3 py-1.5 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
           >
             Admin
           </Link>

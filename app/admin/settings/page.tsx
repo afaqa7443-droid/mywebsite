@@ -41,15 +41,15 @@ export default function AdminSettingsPage() {
     setSaving(false);
   }
 
-  if (loading) return <p className="text-gray-400">Loading...</p>;
+  if (loading) return <p className="text-gray-400 dark:text-gray-500">Loading...</p>;
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold text-gray-900">Site Settings</h1>
+      <h1 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">Site Settings</h1>
 
       <form onSubmit={handleSubmit} className="max-w-md space-y-5">
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
             WhatsApp Number
           </label>
           <input
@@ -58,15 +58,15 @@ export default function AdminSettingsPage() {
             onChange={(e) => setWhatsapp(e.target.value)}
             required
             placeholder="+92 300 1234567"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
           />
-          <p className="mt-1 text-xs text-gray-400">
+          <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">
             This number will be used across the entire site — navbar + all listing contact buttons.
           </p>
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium text-gray-700">
+          <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
             Phone Number (optional)
           </label>
           <input
@@ -74,12 +74,12 @@ export default function AdminSettingsPage() {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+92 300 1234567"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
           />
         </div>
 
         {message && (
-          <p className={`text-sm ${message === 'Settings saved!' ? 'text-green-600' : 'text-red-600'}`}>
+          <p className={`text-sm ${message === 'Settings saved!' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
             {message}
           </p>
         )}

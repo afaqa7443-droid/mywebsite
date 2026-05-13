@@ -38,13 +38,13 @@ export default function AdminDashboard() {
   }
 
   if (loading) {
-    return <p className="text-gray-400">Loading...</p>;
+    return <p className="text-gray-400 dark:text-gray-500">Loading...</p>;
   }
 
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Dashboard</h1>
         <Link
           href="/admin/new"
           className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-700"
@@ -53,7 +53,7 @@ export default function AdminDashboard() {
         </Link>
       </div>
       {error && (
-        <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</div>
+        <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700 dark:bg-red-950 dark:text-red-400">{error}</div>
       )}
       <DataTable listings={listings} onDelete={handleDelete} />
     </div>

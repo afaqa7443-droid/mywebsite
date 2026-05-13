@@ -50,16 +50,16 @@ export default function AdminReviewsPage() {
 
   return (
     <div>
-      <h1 className="mb-6 text-2xl font-bold text-gray-900">Reviews</h1>
+      <h1 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">Reviews</h1>
 
       <div className="mb-4">
-        <label className="mb-1 block text-sm font-medium text-gray-700">
+        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
           Select Listing
         </label>
         <select
           value={selectedListing ?? ''}
           onChange={(e) => selectListing(e.target.value)}
-          className="w-full max-w-sm rounded-lg border border-gray-300 px-3 py-2 text-sm"
+          className="w-full max-w-sm rounded-lg border border-gray-300 px-3 py-2 text-sm dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
         >
           <option value="">Choose a listing...</option>
           {listings.map((l) => (
@@ -82,7 +82,7 @@ export default function AdminReviewsPage() {
             {showForm ? 'Cancel' : '+ Add Review'}
           </button>
 
-          {reviewsLoading && <p className="text-sm text-gray-400">Loading reviews...</p>}
+          {reviewsLoading && <p className="text-sm text-gray-400 dark:text-gray-500">Loading reviews...</p>}
 
           {showForm && (
             <ReviewForm
@@ -96,7 +96,7 @@ export default function AdminReviewsPage() {
             {reviews.map((review) => (
               <div
                 key={review.id}
-                className="rounded-xl border border-gray-200 p-4"
+                className="rounded-xl border border-gray-200 p-4 dark:border-gray-700"
               >
                 <div className="flex items-center justify-between">
                   <div>
@@ -113,25 +113,25 @@ export default function AdminReviewsPage() {
                         setEditingReview(review);
                         setShowForm(true);
                       }}
-                      className="text-xs text-blue-600 hover:text-blue-800"
+                      className="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(review.id)}
-                      className="text-xs text-red-600 hover:text-red-800"
+                      className="text-xs text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
                     >
                       Delete
                     </button>
                   </div>
                 </div>
                 {review.text && (
-                  <p className="mt-2 text-sm text-gray-600">{review.text}</p>
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{review.text}</p>
                 )}
               </div>
             ))}
             {reviews.length === 0 && !showForm && (
-              <p className="text-sm text-gray-400">No reviews for this listing.</p>
+              <p className="text-sm text-gray-400 dark:text-gray-500">No reviews for this listing.</p>
             )}
           </div>
         </>

@@ -14,3 +14,21 @@
   --accent-600: #2563eb;
   --font-sans: system-ui, -apple-system, sans-serif;
 }
+
+.dark {
+  --brand-50: #052e16;
+  --brand-100: #064e3b;
+  --brand-200: #065f46;
+  --brand-500: #22c55e;
+  --brand-600: #16a34a;
+  --brand-700: #15803d;
+  --accent-50: #0c1929;
+  --accent-500: #3b82f6;
+  --accent-600: #60a5fa;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors;
+  }
+}

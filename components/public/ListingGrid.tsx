@@ -8,7 +8,7 @@ interface Props {
 export default function ListingGrid({ listings }: Props) {
   if (listings.length === 0) {
     return (
-      <div className="py-20 text-center text-gray-500">
+      <div className="py-20 text-center text-gray-500 dark:text-gray-400">
         No listings available yet. Check back soon!
       </div>
     );

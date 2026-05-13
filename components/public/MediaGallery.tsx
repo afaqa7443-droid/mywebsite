@@ -15,7 +15,7 @@ export default function MediaGallery({ media }: Props) {
 
   if (all.length === 0) {
     return (
-      <div className="flex aspect-square items-center justify-center rounded-xl bg-gray-100 text-gray-400">
+      <div className="flex aspect-square items-center justify-center rounded-xl bg-gray-100 text-gray-400 dark:bg-gray-800 dark:text-gray-500">
         No media
       </div>
     );
@@ -25,7 +25,7 @@ export default function MediaGallery({ media }: Props) {
 
   return (
     <div>
-      <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-gray-100">
+      <div className="flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800">
         {active.type === 'image' ? (
           <img
             src={active.url}
@@ -53,7 +53,7 @@ export default function MediaGallery({ media }: Props) {
               {item.type === 'image' ? (
                 <img src={item.url} alt="" className="h-full w-full object-cover" />
               ) : (
-                <div className="flex h-full items-center justify-center bg-gray-800 text-white text-xs">
+                <div className="flex h-full items-center justify-center bg-gray-800 text-white text-xs dark:bg-gray-700">
                   Video
                 </div>
               )}

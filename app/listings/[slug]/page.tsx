@@ -70,9 +70,9 @@ export default async function ListingPage({
     .single();
 
   const conditionColor = {
-    Excellent: 'text-green-700 bg-green-50',
-    Good: 'text-amber-700 bg-amber-50',
-    Fair: 'text-red-700 bg-red-50',
+    Excellent: 'text-green-700 bg-green-50 dark:text-green-400 dark:bg-green-950',
+    Good: 'text-amber-700 bg-amber-50 dark:text-amber-400 dark:bg-amber-950',
+    Fair: 'text-red-700 bg-red-50 dark:text-red-400 dark:bg-red-950',
   }[listing.condition as Listing['condition']];
 
   return (
@@ -81,7 +81,7 @@ export default async function ListingPage({
       <main className="mx-auto max-w-6xl px-4 py-8">
         <a
           href="/"
-          className="mb-4 inline-block text-sm text-gray-500 hover:text-gray-700"
+          className="mb-4 inline-block text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
         >
           &larr; Back to all listings
         </a>
@@ -90,18 +90,18 @@ export default async function ListingPage({
           <MediaGallery media={listing.media} />
 
           <div>
-            <p className="text-xs uppercase tracking-wide text-gray-500">
+            <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
               {listing.brand} &middot; {listing.model}
             </p>
-            <h1 className="mt-1 text-2xl font-bold text-gray-900">
+            <h1 className="mt-1 text-2xl font-bold text-gray-900 dark:text-gray-100">
               {listing.title}
             </h1>
-            <p className="mt-2 text-3xl font-bold text-gray-900">
+            <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-gray-100">
               {formatPrice(listing.price)}
             </p>
 
             <div className="mt-3 flex flex-wrap gap-2">
-              <span className="rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-green-700">
+              <span className="rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-green-700 dark:bg-green-950 dark:text-green-400">
                 {listing.quantity} in stock
               </span>
               <span
@@ -111,12 +111,12 @@ export default async function ListingPage({
               </span>
             </div>
 
-            <p className="mt-4 whitespace-pre-line leading-relaxed text-gray-600">
+            <p className="mt-4 whitespace-pre-line leading-relaxed text-gray-600 dark:text-gray-400">
               {listing.description}
             </p>
 
-            <div className="mt-6 border-t border-gray-200 pt-6">
-              <h3 className="mb-3 text-sm font-semibold text-gray-900">
+            <div className="mt-6 border-t border-gray-200 pt-6 dark:border-gray-700">
+              <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">
                 Contact to Buy
               </h3>
               <ContactButtons
@@ -132,8 +132,8 @@ export default async function ListingPage({
         </div>
 
         {listing.reviews.length > 0 && (
-          <section className="mt-12 border-t border-gray-200 pt-8">
-            <h2 className="mb-4 text-xl font-bold text-gray-900">
+          <section className="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700">
+            <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-gray-100">
               Reviews ({listing.reviews.length})
             </h2>
             <div className="space-y-3">
